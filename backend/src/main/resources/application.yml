@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: spring-postgres-crud
+  datasource:
+    url: jdbc:postgresql://localhost:5432/inventory
+    username: postgres
+    password: shazid313
+  jpa:
+    hibernate:
+      ddl-auto: update
