@@ -4,8 +4,6 @@ import toast from "react-hot-toast";
 import { useCreateEmployeeMutation } from "../redux/rtk/all-requests";
 
 const EmployeeForm = () => {
-  const [showPassword, setShowPassword] = useState(false);
-
   const navigate = useNavigate();
   const [createEmployee, { isLoading }] = useCreateEmployeeMutation();
 
@@ -13,7 +11,6 @@ const EmployeeForm = () => {
     firstName: "",
     lastName: "",
     email: "",
-    address: "",
   });
 
   const handleInputChange = (e) => {
@@ -28,7 +25,7 @@ const EmployeeForm = () => {
     e.preventDefault();
 
     // Required fields
-    const requiredFields = ["name", "gender", "email", "password"];
+    const requiredFields = ["firstName", "lastName", "email"];
     const missingFields = requiredFields.filter((field) => !element[field]);
 
     if (missingFields.length > 0) {
@@ -40,109 +37,48 @@ const EmployeeForm = () => {
 
     try {
       await createEmployee(element).unwrap();
-      toast.success("New Employee Created Successfully");
+      toast.success("New Supplier Created Successfully");
       navigate(-1);
     } catch (error) {
       toast.error(error?.data?.message || "Please fill the fields correctly");
     }
   };
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
   return (
     <div>
       <div>
-        <p className="text-2xl font-bold mb-6 text-center">Add New Employee</p>
+        <p className="text-2xl font-bold mb-6 text-center">Add New Supplier</p>
         <form onSubmit={handleSubmit} className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Name */}
             <div>
               <label className="block text-sm font-medium text-gray-900">
-                Name *
+                First Name *
               </label>
               <div className="mt-2">
                 <input
-                  name="name"
+                  name="firstName"
                   type="text"
-                  value={element.name}
+                  value={element.firstName}
                   onChange={handleInputChange}
                   className="block w-full rounded-md border py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-blue-600 sm:text-sm"
                 />
-              </div>
-            </div>
-
-            {/* Gender */}
-            <div>
-              <label className="block text-sm font-medium text-gray-900">
-                Gender *
-              </label>
-              <div className="mt-2">
-                <select
-                  name="gender"
-                  value={element.gender}
-                  onChange={handleInputChange}
-                  className="block w-full rounded-md border py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-blue-600 sm:text-sm"
-                >
-                  <option value="">--- Select Gender ---</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                </select>
               </div>
             </div>
 
             {/* Age */}
             <div>
               <label className="block text-sm font-medium text-gray-900">
-                Age
+                Last Name
               </label>
               <div className="mt-2">
                 <input
-                  name="age"
-                  type="number"
-                  value={element.age}
+                  name="lastName"
+                  type="text"
+                  value={element.lastName}
                   onChange={handleInputChange}
                   className="block w-full rounded-md border py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-blue-600 sm:text-sm"
                 />
-              </div>
-            </div>
-
-            {/* Password */}
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-900"
-              >
-                Password *
-              </label>
-              <div className="mt-2 relative">
-                {" "}
-                {/* Added 'relative' for positioning the button */}
-                <input
-                  id="password" // Added an ID for the label to be correctly associated
-                  name="password"
-                  // Conditional type: 'text' if showPassword is true, otherwise 'password'
-                  type={showPassword ? "text" : "password"}
-                  value={element.password}
-                  onChange={handleInputChange}
-                  required
-                  className="block w-full rounded-md border py-1.5 px-2 pr-10 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-blue-600 sm:text-sm"
-                  // Added 'pr-10' (padding-right) to ensure text doesn't go under the button
-                />
-                {/* The Eye Button */}
-                <button
-                  type="button"
-                  onClick={togglePasswordVisibility}
-                  // Absolute positioning to place the button inside the input area
-                  className="absolute inset-y-0 right-0 px-3 flex items-center text-sm leading-5 text-gray-600 focus:outline-none"
-                  aria-label={showPassword ? "Hide password" : "Show password"}
-                >
-                  {/* You should replace this with a proper icon (e.g., from Heroicons, Font Awesome, etc.)
-            For example, you'd use an <EyeIcon /> component or similar here.
-          */}
-                  {showPassword ? "🙈" : "👁️"}
-                </button>
               </div>
             </div>
 
@@ -157,22 +93,6 @@ const EmployeeForm = () => {
                   type="email"
                   value={element.email}
                   onChange={handleInputChange}
-                  className="block w-full rounded-md border py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 sm:text-sm"
-                />
-              </div>
-            </div>
-
-            {/* Address */}
-            <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-900">
-                Address
-              </label>
-              <div className="mt-2">
-                <textarea
-                  name="address"
-                  value={element.address}
-                  onChange={handleInputChange}
-                  rows="3"
                   className="block w-full rounded-md border py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 sm:text-sm"
                 />
               </div>

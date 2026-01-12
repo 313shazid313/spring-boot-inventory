@@ -66,22 +66,14 @@ const Employees = () => {
                   Sl No.
                 </th>
                 <th scope="col" className="px-3 py-3">
-                  Name
+                  First Name
                 </th>
                 <th scope="col" className="px-3 py-3">
-                  Gender
+                  Last Name
                 </th>
-                <th scope="col" className="px-3 py-3">
-                  Age
-                </th>
+
                 <th scope="col" className="px-3 py-3">
                   Email
-                </th>
-                <th scope="col" className="px-3 py-3">
-                  Address
-                </th>
-                <th scope="col" className="px-3 py-3">
-                  Created At
                 </th>
 
                 <th scope="col" className="px-3 py-3">
@@ -97,14 +89,9 @@ const Employees = () => {
                   className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
                 >
                   <td className="px-3 py-3">{index + 1}</td>
-                  <td className="px-3 py-3">{item?.name}</td>
-                  <td className="px-3 py-3">{item?.gender}</td>
-                  <td className="px-3 py-3">{item?.age}</td>
+                  <td className="px-3 py-3">{item?.firstName}</td>
+                  <td className="px-3 py-3">{item?.lastName}</td>
                   <td className="px-3 py-3">{item?.email}</td>
-                  <td className="px-3 py-3">{item?.address}</td>
-                  <td className="px-3 py-3">
-                    {new Date(item?.createdAt).toLocaleDateString()}
-                  </td>
 
                   <td className="px-3 py-3 flex space-x-2">
                     <div className="flex flex-row">

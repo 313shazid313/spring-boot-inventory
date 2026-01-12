@@ -45,7 +45,7 @@ const allApi = createApi({
 
     deleteEmployee: builder.mutation({
       query: (id) => ({
-        url: `/delete-employee/${id}`,
+        url: `/api/v1/employees/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["All"],

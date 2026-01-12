@@ -1,4 +1,4 @@
-package com.hasan.springpostgrescrud.exception;
+package com.hasan.springpostgrescrud.exeption;
 
 
 
