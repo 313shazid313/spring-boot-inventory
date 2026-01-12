@@ -14,7 +14,7 @@ const allApi = createApi({
   endpoints: (builder) => ({
     createEmployee: builder.mutation({
       query: (data) => ({
-        url: "/create-employee",
+        url: "/api/v1/employees",
         method: "POST",
         body: data,
       }),
@@ -31,7 +31,7 @@ const allApi = createApi({
 
     updateEmployee: builder.mutation({
       query: ({ id, ...data }) => ({
-        url: `/update-employee/${id}`,
+        url: `/api/v1/employees/${id}`,
         method: "PUT",
         body: data,
       }),
@@ -39,7 +39,7 @@ const allApi = createApi({
     }),
 
     singleEmployee: builder.query({
-      query: (id) => `/single-employee/${id}`,
+      query: (id) => `/api/v1/employees/${id}`,
       providesTags: ["All"],
     }),
 

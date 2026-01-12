@@ -10,10 +10,8 @@ const EmployeeForm = () => {
   const [createEmployee, { isLoading }] = useCreateEmployeeMutation();
 
   const [element, setElement] = useState({
-    name: "",
-    gender: "",
-    age: "",
-    password: "",
+    firstName: "",
+    lastName: "",
     email: "",
     address: "",
   });

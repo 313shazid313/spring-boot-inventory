@@ -1,5 +1,6 @@
 package com.hasan.springpostgrescrud.service;
 
+import com.hasan.springpostgrescrud.exception.DuplicateResourceException;
 import com.hasan.springpostgrescrud.dto.EmployeeDto;
 import com.hasan.springpostgrescrud.entity.Employee;
 import com.hasan.springpostgrescrud.exeption.ResourceNotFoundException;
@@ -17,12 +18,27 @@ import java.util.stream.Collectors;
 public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepository employeeRepository;
 
-    @Override
-    public EmployeeDto createEmployee(EmployeeDto employeeDto) {
-        Employee employee = EmployeeMapper.mapToEmployee(employeeDto);
-        Employee savedEmployee = employeeRepository.save(employee);
-        return EmployeeMapper.mapToEmployeeDto(savedEmployee);
+@Override
+public EmployeeDto createEmployee(EmployeeDto employeeDto) {
+
+    // Check if email already exists
+    if (employeeRepository.existsByEmail(employeeDto.getEmail())) {
+        throw new DuplicateResourceException("Email already exists");
     }
+
+    // // Check if same first name + last name already exists
+    // if (employeeRepository.existsByFirstNameAndLastName(
+    //         employeeDto.getFirstName(),
+    //         employeeDto.getLastName())) {
+    //     throw new DuplicateResourceException("Employee name already exists");
+    // }
+
+    Employee employee = EmployeeMapper.mapToEmployee(employeeDto);
+    Employee savedEmployee = employeeRepository.save(employee);
+
+    return EmployeeMapper.mapToEmployeeDto(savedEmployee);
+}
+
 
     @Override
     public EmployeeDto getEmployeeById(Long id) {
