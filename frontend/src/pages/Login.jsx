@@ -47,7 +47,7 @@ const Login = () => {
   };
 
   if (user) {
-    return <Navigate to="/dashboard/profile" replace />;
+    return <Navigate to="/dashboard/employees" replace />;
   }
 
   return (

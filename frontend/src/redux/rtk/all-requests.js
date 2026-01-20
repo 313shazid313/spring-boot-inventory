@@ -51,215 +51,96 @@ const allApi = createApi({
       invalidatesTags: ["All"],
     }),
 
-    searchEmployee: builder.query({
-      query: (searchedname) => `/searched-employees?query=${searchedname}`,
-      providesTags: ["All"],
-    }),
-
-    countEmployees: builder.query({
-      query: () => `/count-employees`,
-      providesTags: ["All"],
-    }),
-
-    assignedJob: builder.mutation({
-      query: (id) => ({
-        url: `/assigned-job/${id}`,
-        method: "PATCH",
+    createCategory: builder.mutation({
+      query: (data) => ({
+        url: "/categories",
+        method: "POST",
+        body: data,
       }),
+      providesTags: ["All"],
+    }),
+
+    getCategories: builder.query({
+      query: () => ({
+        url: "/categories",
+        method: "GET",
+      }),
+      providesTags: ["All"],
+    }),
+
+    updateCategory: builder.mutation({
+      query: ({ id, ...data }) => ({
+        url: `/categories/${id}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["All"],
+    }),
+
+    deleteCategory: builder.mutation({
+      query: (id) => ({
+        url: `/categories/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["All"],
+    }),
+
+    singleCategory: builder.query({
+      query: (id) => `/categories/${id}`,
+      providesTags: ["All"],
+    }),
+
+    createItem: builder.mutation({
+      query: ({ categoryId, body }) => ({
+        url: `/items/${categoryId}`,
+        method: "POST",
+        body,
+      }),
+    }),
+
+    getItems: builder.query({
+      query: () => ({
+        url: "/items",
+        method: "GET",
+      }),
+      providesTags: ["All"],
+    }),
+
+    updateItem: builder.mutation({
+      query: ({ id, ...data }) => ({
+        url: `/items/${id}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["All"],
+    }),
+
+    deleteItem: builder.mutation({
+      query: (id) => ({
+        url: `/items/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["All"],
+    }),
+
+    singleItem: builder.query({
+      query: (id) => `/items/${id}`,
       providesTags: ["All"],
     }),
 
     loginAdmin: builder.mutation({
-      query: (data) => ({
+      query: (credentials) => ({
         url: "/api/auth/login",
         method: "POST",
-        body: data,
+        body: credentials,
+        credentials: "include",
       }),
-      providesTags: ["All"],
     }),
-
-    createLeave: builder.mutation({
-      query: (data) => ({
-        url: "/create-leave",
+    logoutUser: builder.mutation({
+      query: () => ({
+        url: "/logout",
         method: "POST",
-        body: data,
       }),
-      providesTags: ["All"],
-    }),
-
-    readLeave: builder.query({
-      query: () => ({
-        url: "/get-leave",
-        method: "GET",
-      }),
-      providesTags: ["All"],
-    }),
-
-    updateLeave: builder.mutation({
-      query: ({ id, ...data }) => ({
-        url: `/update-leave/${id}`,
-        method: "PUT",
-        body: data,
-      }),
-      invalidatesTags: ["All"],
-    }),
-
-    deleteLeave: builder.mutation({
-      query: (id) => ({
-        url: `/delete-leave/${id}`,
-        method: "DELETE",
-      }),
-      invalidatesTags: ["All"],
-    }),
-
-    singleLeave: builder.query({
-      query: (id) => `/single-leave/${id}`,
-      providesTags: ["All"],
-    }),
-
-    approved: builder.mutation({
-      query: (data) => ({
-        url: `/approved/${data}`,
-        method: "PATCH",
-      }),
-      invalidatesTags: ["All"],
-    }),
-
-    rejected: builder.mutation({
-      query: (data) => ({
-        url: `/rejected/${data}`,
-        method: "PATCH",
-      }),
-      invalidatesTags: ["All"],
-    }),
-
-    allLeaveWilhSpecficId: builder.query({
-      query: (id) => `/leave-with-id/${id}`,
-      providesTags: ["All"],
-    }),
-
-    createJob: builder.mutation({
-      query: (data) => ({
-        url: "/create-job",
-        method: "POST",
-        body: data,
-      }),
-      providesTags: ["All"],
-    }),
-
-    readJob: builder.query({
-      query: () => ({
-        url: "/get-job",
-        method: "GET",
-      }),
-      providesTags: ["All"],
-    }),
-
-    updateJob: builder.mutation({
-      query: ({ id, ...data }) => ({
-        url: `/update-job/${id}`,
-        method: "PUT",
-        body: data,
-      }),
-      invalidatesTags: ["All"],
-    }),
-
-    deleteJob: builder.mutation({
-      query: (id) => ({
-        url: `/delete-job/${id}`,
-        method: "DELETE",
-      }),
-      invalidatesTags: ["All"],
-    }),
-
-    singleJob: builder.query({
-      query: (id) => `/single-job/${id}`,
-      providesTags: ["All"],
-    }),
-
-    createDepartment: builder.mutation({
-      query: (data) => ({
-        url: "/create-department",
-        method: "POST",
-        body: data,
-      }),
-      providesTags: ["All"],
-    }),
-
-    readDepartment: builder.query({
-      query: () => ({
-        url: "/get-department",
-        method: "GET",
-      }),
-      providesTags: ["All"],
-    }),
-
-    updateDepartment: builder.mutation({
-      query: ({ id, status }) => ({
-        url: `/update-department/${id}`,
-        method: "PUT",
-        body: status,
-      }),
-      invalidatesTags: ["All"],
-    }),
-
-    deleteDepartment: builder.mutation({
-      query: (id) => ({
-        url: `/delete-department/${id}`,
-        method: "DELETE",
-      }),
-      invalidatesTags: ["All"],
-    }),
-
-    singleDepartment: builder.query({
-      query: (id) => `/single-department/${id}`,
-      providesTags: ["All"],
-    }),
-
-    countDepartment: builder.query({
-      query: () => `/count-department`,
-      providesTags: ["All"],
-    }),
-
-    createPayroll: builder.mutation({
-      query: (data) => ({
-        url: "/create-payroll",
-        method: "POST",
-        body: data,
-      }),
-      providesTags: ["All"],
-    }),
-
-    getPayroll: builder.query({
-      query: () => ({
-        url: "/get-payroll",
-        method: "GET",
-      }),
-      providesTags: ["All"],
-    }),
-
-    deletePayroll: builder.mutation({
-      query: (id) => ({
-        url: `/delete-payroll/${id}`,
-        method: "DELETE",
-      }),
-      invalidatesTags: ["All"],
-    }),
-
-    paidSalary: builder.mutation({
-      query: (data) => ({
-        url: `/paid-salary/${data}`,
-        method: "PATCH",
-      }),
-      invalidatesTags: ["All"],
-    }),
-
-    chartData: builder.query({
-      query: () => ({
-        url: "/get-chart-data",
-        method: "GET",
-      }),
-      providesTags: ["All"],
     }),
   }),
 });
@@ -306,6 +187,20 @@ export const {
   useDeletePayrollMutation,
   // chart
   useChartDataQuery,
+
+  //category
+  useCreateCategoryMutation,
+  useGetCategoriesQuery,
+  useUpdateCategoryMutation,
+  useDeleteCategoryMutation,
+  useSingleCategoryQuery,
+
+  //item
+  useCreateItemMutation,
+  useGetItemsQuery,
+  useUpdateItemMutation,
+  useDeleteItemMutation,
+  useSingleItemQuery,
 } = allApi;
 
 export default allApi;

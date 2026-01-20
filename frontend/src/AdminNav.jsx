@@ -88,6 +88,34 @@ const AdminNav = () => {
               </NavLink>
             </li>
 
+            <li>
+              <NavLink
+                to="/dashboard/category-list"
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+              >
+                <FiPlusCircle className="text-lg" />
+                <span className="ms-3">Categories</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/dashboard/items-list"
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+              >
+                <FiPlusCircle className="text-lg" />
+                <span className="ms-3">Items</span>
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                to="/dashboard/purchase"
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+              >
+                <FiPlusCircle className="text-lg" />
+                <span className="ms-3">Purchase</span>
+              </NavLink>
+            </li>
             {data?.isAdmin && (
               <>
                 <li>
@@ -154,18 +182,8 @@ const AdminNav = () => {
               </>
             )}
 
-            {!data?.isAdmin && (
+            {/* {!data?.isAdmin && (
               <>
-                <li>
-                  <NavLink
-                    to="/dashboard/create-leave"
-                    className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                  >
-                    <FiPlusCircle className="text-lg" />
-                    <span className="ms-3">Make Leave Request</span>
-                  </NavLink>
-                </li>
-
                 <li>
                   <NavLink
                     to="/dashboard/view-leave-requests-employee"
@@ -176,7 +194,7 @@ const AdminNav = () => {
                   </NavLink>
                 </li>
               </>
-            )}
+            )} */}
 
             <li>
               <button

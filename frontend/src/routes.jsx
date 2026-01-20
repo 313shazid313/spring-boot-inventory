@@ -18,6 +18,13 @@ import JobForm from "./pages/JobForm";
 import JobUpdate from "./pages/JobUpdate";
 import PayrollTable from "./pages/PayrollTable";
 import Charts from "./pages/Charts";
+import CategoryList from "./pages/category/CategoryList";
+import CategoryForm from "./pages/category/CategoryForm";
+import CategoryUpdate from "./pages/category/CategoryUpdate";
+import ItemsList from "./pages/items/ItemsList";
+import ItemForm from "./pages/items/ItemForm";
+import ItemUpdate from "./pages/items/ItemUpdate";
+import Makepurchase from "./pages/purchase/Makepurchase";
 
 const routes = createBrowserRouter([
   {
@@ -30,7 +37,14 @@ const routes = createBrowserRouter([
     children: [
       { path: "profile", element: <Profile /> },
       { path: "employees", element: <Employees /> },
-      {path : "charts", element:<Charts/>},
+      { path: "category-list", element: <CategoryList /> },
+      { path: "category-list/category-form", element: <CategoryForm /> },
+      { path: "category-list/category-update/:id", element: <CategoryUpdate /> },
+      { path: "items-list", element: <ItemsList /> },
+      { path: "items-list/item-form", element: <ItemForm /> },
+      { path: "items-list/item-update/:id", element: <ItemUpdate /> },
+      { path: "purchase", element: <Makepurchase /> },
+      { path: "charts", element: <Charts /> },
       { path: "employees/emploree-form", element: <EmployeeForm /> },
       { path: "employees/employee-update/:id", element: <EmployeeUpdate /> },
       { path: "profile/edit-profile", element: <EditProfile /> },
@@ -51,7 +65,7 @@ const routes = createBrowserRouter([
         element: <LeaveRequestsEmployee />,
       },
       { path: "view-leave-requests-admin", element: <LeaveRequestsAdmin /> },
-      {path :"payrolls", element:<PayrollTable/>}
+      { path: "payrolls", element: <PayrollTable /> },
     ],
   },
 ]);

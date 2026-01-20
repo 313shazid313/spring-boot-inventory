@@ -1,66 +1,73 @@
 package com.hasan.springpostgrescrud.controller;
 
+import com.hasan.springpostgrescrud.entity.Category;
 import com.hasan.springpostgrescrud.entity.Item;
-import com.hasan.springpostgrescrud.service.ItemService;
-import org.springframework.http.ResponseEntity;
+import com.hasan.springpostgrescrud.repository.CategoryRepository;
+import com.hasan.springpostgrescrud.repository.ItemRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/items")
+@RequestMapping("/items")
 public class ItemController {
 
-    private final ItemService itemService;
+    private final ItemRepository itemRepo;
+    private final CategoryRepository categoryRepo;
 
-    public ItemController(ItemService itemService) {
-        this.itemService = itemService;
+    public ItemController(ItemRepository itemRepo, CategoryRepository categoryRepo) {
+        this.itemRepo = itemRepo;
+        this.categoryRepo = categoryRepo;
     }
 
-    // Create new item
-    @PostMapping
-    public ResponseEntity<Item> createItem(@RequestBody Item item) {
-        Item savedItem = itemService.saveItem(item);
-        return ResponseEntity.ok(savedItem);
+    @PostMapping("/{categoryId}")
+    public Item createItem(@PathVariable Long categoryId, @RequestBody Item item) {
+        Category category = categoryRepo.findById(categoryId).orElse(null);
+        item.setCategory(category);
+        return itemRepo.save(item);
     }
 
-    // Get all items
     @GetMapping
-    public ResponseEntity<List<Item>> getAllItems() {
-        return ResponseEntity.ok(itemService.getAllItems());
+    public List<Item> getAll() {
+        return itemRepo.findAll();
     }
 
-    // Get single item by ID
     @GetMapping("/{id}")
-    public ResponseEntity<Item> getItemById(@PathVariable Long id) {
-        Item item = itemService.getItemById(id);
-        if (item != null) {
-            return ResponseEntity.ok(item);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public Item getById(@PathVariable Long id) {
+        return itemRepo.findById(id).orElse(null);
     }
 
-    // Update item
-    @PutMapping("/{id}")
-    public ResponseEntity<Item> updateItem(@PathVariable Long id, @RequestBody Item itemDetails) {
-        Item existingItem = itemService.getItemById(id);
-        if (existingItem != null) {
-            existingItem.setName(itemDetails.getName());
-            existingItem.setCategory(itemDetails.getCategory());
-            existingItem.setQuantity(itemDetails.getQuantity());
-            existingItem.setPrice(itemDetails.getPrice());
-            Item updatedItem = itemService.updateItem(existingItem);
-            return ResponseEntity.ok(updatedItem);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    // Delete item
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteItem(@PathVariable Long id) {
-        itemService.deleteItem(id);
-        return ResponseEntity.noContent().build();
+    public String delete(@PathVariable Long id) {
+        itemRepo.deleteById(id);
+        return "Item Deleted";
     }
+
+@PutMapping("/{id}")
+public Item updateItem(@PathVariable Long id, @RequestBody Item updatedItem) {
+    return itemRepo.findById(id)
+            .map(item -> {
+
+                if (updatedItem.getName() != null)
+                    item.setName(updatedItem.getName());
+                if (updatedItem.getQuantity() != null)
+                    item.setQuantity(updatedItem.getQuantity());
+                if (updatedItem.getPrice() != null)
+                    item.setPrice(updatedItem.getPrice());
+
+                if (updatedItem.getCategory() != null &&
+                    updatedItem.getCategory().getId() != null) {
+
+                    Category category = categoryRepo
+                            .findById(updatedItem.getCategory().getId())
+                            .orElse(null);
+                    item.setCategory(category);
+                }
+
+                return itemRepo.save(item);
+            })
+            .orElse(null);
+}
+
+
 }
