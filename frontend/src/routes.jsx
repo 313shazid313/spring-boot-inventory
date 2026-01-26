@@ -18,6 +18,11 @@ import ItemUpdate from "./pages/items/ItemUpdate";
 import SupplierList from "./pages/suppliers/SupplierList";
 import SupplierForm from "./pages/suppliers/SupplierForm";
 import SupplierUpdate from "./pages/suppliers/SupplierUpdate";
+
+import CustomersList from "./pages/customers/CustomersList";
+import CustomerForm from "./pages/customers/CustomerForm";
+import CustomersUpdate from "./pages/customers/CustomersUpdate";
+
 import PurchaseList from "./pages/purchase/PurchaseList";
 import Makepurchase from "./pages/purchase/Makepurchase";
 import MakeSell from "./pages/sale/MakeSell";
@@ -53,6 +58,10 @@ const routes = createBrowserRouter([
       { path: "suppliers", element: <SupplierList /> },
       { path: "suppliers/supplier-form", element: <SupplierForm /> },
       { path: "suppliers/supplier-update/:id", element: <SupplierUpdate /> },
+
+      { path: "customers", element: <CustomersList /> },
+      { path: "customers/customer-form", element: <CustomerForm /> },
+      { path: "customers/customer-update/:id", element: <CustomersUpdate /> },
 
       { path: "make-purchase", element: <Makepurchase /> },
       { path: "get-purchases", element: <PurchaseList /> },

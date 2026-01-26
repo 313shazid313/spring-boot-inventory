@@ -4,8 +4,11 @@ import {
   useGetCustomersQuery,
   useGetItemsQuery,
 } from "../../redux/rtk/all-requests";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const MakeSell = () => {
+  const navigate = useNavigate();
   const { data: customers = [] } = useGetCustomersQuery();
   const { data: items = [] } = useGetItemsQuery();
   const [makeSale, { isLoading }] = useMakeSaleMutation();
@@ -41,8 +44,10 @@ const MakeSell = () => {
     };
 
     try {
+      console.log(payload);
       await makeSale(payload).unwrap();
-      alert("Sale created successfully!");
+      toast.success("Sale created successfully");
+      navigate("/dashboard/get-sales");
       setCustomerId("");
       setSaleItems([{ itemId: "", quantity: 1 }]);
     } catch (err) {

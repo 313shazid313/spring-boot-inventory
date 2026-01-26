@@ -5,6 +5,7 @@ import com.hasan.springpostgrescrud.entity.Item;
 import com.hasan.springpostgrescrud.repository.CategoryRepository;
 import com.hasan.springpostgrescrud.repository.ItemRepository;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -28,8 +29,8 @@ public class ItemController {
     }
 
     @GetMapping
-    public List<Item> getAll() {
-        return itemRepo.findAll();
+    public List<Item> getAllDesc() {
+        return itemRepo.findAll(Sort.by(Sort.Direction.DESC, "id"));
     }
 
     @GetMapping("/{id}")
@@ -43,31 +44,30 @@ public class ItemController {
         return "Item Deleted";
     }
 
-@PutMapping("/{id}")
-public Item updateItem(@PathVariable Long id, @RequestBody Item updatedItem) {
-    return itemRepo.findById(id)
-            .map(item -> {
+    @PutMapping("/{id}")
+    public Item updateItem(@PathVariable Long id, @RequestBody Item updatedItem) {
+        return itemRepo.findById(id)
+                .map(item -> {
 
-                if (updatedItem.getName() != null)
-                    item.setName(updatedItem.getName());
-                if (updatedItem.getQuantity() != null)
-                    item.setQuantity(updatedItem.getQuantity());
-                if (updatedItem.getPrice() != null)
-                    item.setPrice(updatedItem.getPrice());
+                    if (updatedItem.getName() != null)
+                        item.setName(updatedItem.getName());
+                    if (updatedItem.getQuantity() != null)
+                        item.setQuantity(updatedItem.getQuantity());
+                    if (updatedItem.getPrice() != null)
+                        item.setPrice(updatedItem.getPrice());
 
-                if (updatedItem.getCategory() != null &&
-                    updatedItem.getCategory().getId() != null) {
+                    if (updatedItem.getCategory() != null &&
+                            updatedItem.getCategory().getId() != null) {
 
-                    Category category = categoryRepo
-                            .findById(updatedItem.getCategory().getId())
-                            .orElse(null);
-                    item.setCategory(category);
-                }
+                        Category category = categoryRepo
+                                .findById(updatedItem.getCategory().getId())
+                                .orElse(null);
+                        item.setCategory(category);
+                    }
 
-                return itemRepo.save(item);
-            })
-            .orElse(null);
-}
-
+                    return itemRepo.save(item);
+                })
+                .orElse(null);
+    }
 
 }

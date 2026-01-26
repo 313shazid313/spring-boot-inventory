@@ -224,7 +224,7 @@ const allApi = createApi({
 
     makeSale: builder.mutation({
       query: (data) => ({
-        url: "/sales",
+        url: "/sales/sell",
         method: "POST",
         body: data,
       }),

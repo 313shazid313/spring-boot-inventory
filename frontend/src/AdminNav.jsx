@@ -116,6 +116,15 @@ const AdminNav = () => {
                 <span className="ms-3">Suppliers</span>
               </NavLink>
             </li>
+            <li>
+              <NavLink
+                to="/dashboard/customers"
+                className="flex items-center p-2"
+              >
+                <FiBriefcase className="text-lg" />
+                <span className="ms-3">Customers</span>
+              </NavLink>
+            </li>
 
             <li>
               <NavLink
