@@ -23,6 +23,10 @@ public class Purchase {
     private LocalDateTime purchaseDate;
 
     @ManyToOne
+    @JoinColumn(name = "supplier_id")
+    private Supplier supplier;
+
+    @ManyToOne
     @JoinColumn(name = "item_id")
     private Item item;
 

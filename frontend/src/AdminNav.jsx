@@ -84,7 +84,7 @@ const AdminNav = () => {
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <FiUser className="text-lg" />
-                <span className="flex-1 ms-3 whitespace-nowrap">Suppliers</span>
+                <span className="flex-1 ms-3 whitespace-nowrap">Employees</span>
               </NavLink>
             </li>
 
@@ -114,6 +114,15 @@ const AdminNav = () => {
               >
                 <FiPlusCircle className="text-lg" />
                 <span className="ms-3">Purchase</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/dashboard/suppliers"
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+              >
+                <FiPlusCircle className="text-lg" />
+                <span className="ms-3">Suppliers</span>
               </NavLink>
             </li>
             {data?.isAdmin && (

@@ -142,6 +142,32 @@ const allApi = createApi({
         method: "POST",
       }),
     }),
+
+    getSuppliers: builder.query({
+      query: () => ({
+        url: "/suppliers",
+        method: "GET",
+      }),
+      providesTags: ["All"],
+    }),
+
+    updateSupplier: builder.mutation({
+      query: ({ id, ...data }) => ({
+        url: `/suppliers/${id}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["All"],
+    }),
+
+    createSupplier: builder.mutation({
+      query: (data) => ({
+        url: "/suppliers",
+        method: "POST",
+        body: data,
+      }),
+      providesTags: ["All"],
+    }),
   }),
 });
 
@@ -152,41 +178,7 @@ export const {
   useDeleteEmployeeMutation,
   useSingleEmployeeQuery,
   useLoginAdminMutation,
-  useAssignedJobMutation,
-  useCountEmployeesQuery,
-  //leave
-  useCreateLeaveMutation,
-  useDeleteLeaveMutation,
-  useReadLeaveQuery,
-  useSingleLeaveQuery,
-  useUpdateLeaveMutation,
-  useApprovedMutation,
-  useRejectedMutation,
-  useAllLeaveWilhSpecficIdQuery,
-  useSearchEmployeeQuery,
-
-  //job
-  useCreateJobMutation,
-  useDeleteJobMutation,
-  useReadJobQuery,
-  useSingleJobQuery,
-  useUpdateJobMutation,
-
-  //department
-  useCreateDepartmentMutation,
-  useDeleteDepartmentMutation,
-  useReadDepartmentQuery,
-  useSingleDepartmentQuery,
-  useUpdateDepartmentMutation,
-  useCountDepartmentQuery,
-
-  //payroll
-  useCreatePayrollMutation,
-  useGetPayrollQuery,
-  usePaidSalaryMutation,
-  useDeletePayrollMutation,
-  // chart
-  useChartDataQuery,
+  useLogoutUserMutation,
 
   //category
   useCreateCategoryMutation,
@@ -201,6 +193,11 @@ export const {
   useUpdateItemMutation,
   useDeleteItemMutation,
   useSingleItemQuery,
+
+  //supplier
+  useGetSuppliersQuery,
+  useUpdateSupplierMutation,
+  useCreateSupplierMutation,
 } = allApi;
 
 export default allApi;

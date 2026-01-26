@@ -7,17 +7,7 @@ import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import EditProfile from "./pages/EditProfile";
 import ResetPassword from "./pages/ResetPassword";
-import LeaveForm from "./pages/LeaveForm";
-import LeaveRequestsEmployee from "./pages/LeaveRequestsEmployee";
-import LeaveRequestsAdmin from "./pages/LeaveRequestsAdmin";
-import JobTable from "./pages/JobTable";
-import DepartmentTable from "./pages/DepartmentTable";
-import DepartmentForm from "./pages/DepartmentForm";
-import DepartmentUpdata from "./pages/DepartmentUpdata";
-import JobForm from "./pages/JobForm";
-import JobUpdate from "./pages/JobUpdate";
-import PayrollTable from "./pages/PayrollTable";
-import Charts from "./pages/Charts";
+// import Charts from "./pages/Charts";
 import CategoryList from "./pages/category/CategoryList";
 import CategoryForm from "./pages/category/CategoryForm";
 import CategoryUpdate from "./pages/category/CategoryUpdate";
@@ -25,6 +15,9 @@ import ItemsList from "./pages/items/ItemsList";
 import ItemForm from "./pages/items/ItemForm";
 import ItemUpdate from "./pages/items/ItemUpdate";
 import Makepurchase from "./pages/purchase/Makepurchase";
+import SupplierList from "./pages/suppliers/SupplierList";
+import SupplierForm from "./pages/suppliers/SupplierForm";
+import SupplierUpdate from "./pages/suppliers/SupplierUpdate";
 
 const routes = createBrowserRouter([
   {
@@ -39,33 +32,23 @@ const routes = createBrowserRouter([
       { path: "employees", element: <Employees /> },
       { path: "category-list", element: <CategoryList /> },
       { path: "category-list/category-form", element: <CategoryForm /> },
-      { path: "category-list/category-update/:id", element: <CategoryUpdate /> },
+      {
+        path: "category-list/category-update/:id",
+        element: <CategoryUpdate />,
+      },
       { path: "items-list", element: <ItemsList /> },
       { path: "items-list/item-form", element: <ItemForm /> },
       { path: "items-list/item-update/:id", element: <ItemUpdate /> },
       { path: "purchase", element: <Makepurchase /> },
-      { path: "charts", element: <Charts /> },
+      // { path: "charts", element: <Charts /> },
       { path: "employees/emploree-form", element: <EmployeeForm /> },
       { path: "employees/employee-update/:id", element: <EmployeeUpdate /> },
       { path: "profile/edit-profile", element: <EditProfile /> },
       { path: "profile/reset-password/:id", element: <ResetPassword /> },
-      { path: "create-leave", element: <LeaveForm /> },
-      { path: "departments", element: <DepartmentTable /> },
-      { path: "departments/department-form", element: <DepartmentForm /> },
-      {
-        path: "departments/department-update/:id",
-        element: <DepartmentUpdata />,
-      },
-      { path: "jobs", element: <JobTable /> },
-      { path: "jobs/job-form", element: <JobForm /> },
-      { path: "jobs/job-update/:id", element: <JobUpdate /> },
 
-      {
-        path: "view-leave-requests-employee",
-        element: <LeaveRequestsEmployee />,
-      },
-      { path: "view-leave-requests-admin", element: <LeaveRequestsAdmin /> },
-      { path: "payrolls", element: <PayrollTable /> },
+      { path: "suppliers", element: <SupplierList /> },
+      { path: "suppliers/supplier-form", element: <SupplierForm /> },
+      { path: "suppliers/supplier-update/:id", element: <SupplierUpdate /> },
     ],
   },
 ]);
