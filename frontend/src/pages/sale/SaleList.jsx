@@ -12,7 +12,7 @@ const SaleList = () => {
     <div>
       <p className="text-2xl py-4 text-center font-semibold">Sales List</p>
 
-      <div className="flex justify-between items-center gap-4">
+      <div className="flex justify-end items-center gap-4">
         {/* Add Sale Button */}
         <Link
           to="sale-form"

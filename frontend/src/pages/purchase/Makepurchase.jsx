@@ -5,8 +5,10 @@ import {
   useGetItemsQuery,
 } from "../../redux/rtk/all-requests";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Makepurchase = () => {
+  const navigate = useNavigate();
   const [makePurchase, { isLoading }] = useMakePurchaseMutation();
   const { data: suppliers = [] } = useGetSuppliersQuery();
   const { data: items = [] } = useGetItemsQuery();
@@ -46,8 +48,8 @@ const Makepurchase = () => {
     try {
       await makePurchase(payload).unwrap();
       toast.success("Purchase created successfully");
-
       setForm({ quantity: "", supplierId: "", itemId: "" });
+      navigate("/dashboard/purchases");
     } catch (err) {
       console.error(err);
       toast.error("Failed to create purchase");

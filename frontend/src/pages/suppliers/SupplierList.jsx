@@ -14,8 +14,6 @@ import { Tooltip } from "react-tooltip";
 const SupplierList = () => {
   const { data, isError, isLoading, refetch } = useGetSuppliersQuery();
 
-  // ?search utility -----------
-
   console.log(data);
 
   useEffect(() => {
@@ -65,7 +63,7 @@ const SupplierList = () => {
             </thead>
 
             <tbody>
-              {data.map((item, index) => (
+              {data?.map((item, index) => (
                 <tr
                   key={item.id}
                   className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"

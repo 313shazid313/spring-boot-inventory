@@ -66,7 +66,7 @@ const EmployeeUpdate = () => {
   return (
     <div>
       <div>
-        <p className="text-2xl font-bold mb-6 text-center">Add New Supplier</p>
+        <p className="text-2xl font-bold mb-6 text-center">Update Employee</p>
         <form onSubmit={handleSubmit} className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Name */}

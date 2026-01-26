@@ -87,7 +87,7 @@ const SupplierUpdate = () => {
             {/* Age */}
             <div>
               <label className="block text-sm font-medium text-gray-900">
-                Last Name
+                Phone Number *
               </label>
               <div className="mt-2">
                 <input
@@ -103,7 +103,7 @@ const SupplierUpdate = () => {
             {/* Email */}
             <div>
               <label className="block text-sm font-medium text-gray-900">
-                Email
+                Email *
               </label>
               <div className="mt-2">
                 <input

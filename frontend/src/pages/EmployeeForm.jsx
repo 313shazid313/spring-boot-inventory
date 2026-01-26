@@ -30,7 +30,7 @@ const EmployeeForm = () => {
 
     if (missingFields.length > 0) {
       toast.error(
-        `Please fill in all required fields: ${missingFields.join(", ")}`
+        `Please fill in all required fields: ${missingFields.join(", ")}`,
       );
       return;
     }
@@ -47,7 +47,7 @@ const EmployeeForm = () => {
   return (
     <div>
       <div>
-        <p className="text-2xl font-bold mb-6 text-center">Add New Supplier</p>
+        <p className="text-2xl font-bold mb-6 text-center">Add New Employee</p>
         <form onSubmit={handleSubmit} className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Name */}
@@ -85,7 +85,7 @@ const EmployeeForm = () => {
             {/* Email */}
             <div>
               <label className="block text-sm font-medium text-gray-900">
-                Email
+                Email *
               </label>
               <div className="mt-2">
                 <input
