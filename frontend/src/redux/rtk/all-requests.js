@@ -174,6 +174,37 @@ const allApi = createApi({
       providesTags: ["All"],
     }),
 
+    createCustomer: builder.mutation({
+      query: (data) => ({
+        url: "/customers",
+        method: "POST",
+        body: data,
+      }),
+      providesTags: ["All"],
+    }),
+
+    getCustomers: builder.query({
+      query: () => ({
+        url: "/customers",
+        method: "GET",
+      }),
+      providesTags: ["All"],
+    }),
+
+    updateCustomer: builder.mutation({
+      query: ({ id, ...data }) => ({
+        url: `/customers/${id}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["All"],
+    }),
+
+    getSingleCustomer: builder.query({
+      query: (id) => `/customers/${id}`,
+      providesTags: ["All"],
+    }),
+
     makePurchase: builder.mutation({
       query: (data) => ({
         url: "/purchases",
@@ -186,6 +217,23 @@ const allApi = createApi({
     getPurchases: builder.query({
       query: () => ({
         url: "/purchases",
+        method: "GET",
+      }),
+      providesTags: ["All"],
+    }),
+
+    makeSale: builder.mutation({
+      query: (data) => ({
+        url: "/sales",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["All"],
+    }),
+
+    getSales: builder.query({
+      query: () => ({
+        url: "/sales",
         method: "GET",
       }),
       providesTags: ["All"],
@@ -222,9 +270,19 @@ export const {
   useCreateSupplierMutation,
   useGetSingleSupplierQuery,
 
+  //customer
+  useCreateCustomerMutation,
+  useGetCustomersQuery,
+  useUpdateCustomerMutation,
+  useGetSingleCustomerQuery,
+
   //purchase
   useMakePurchaseMutation,
   useGetPurchasesQuery,
+
+  //sale
+  useMakeSaleMutation,
+  useGetSalesQuery,
 } = allApi;
 
 export default allApi;
