@@ -238,6 +238,11 @@ const allApi = createApi({
       }),
       providesTags: ["All"],
     }),
+
+    getSingleSale: builder.query({
+      query: (id) => `/sales/${id}`,
+      providesTags: ["All"],
+    }),
   }),
 });
 
@@ -283,6 +288,7 @@ export const {
   //sale
   useMakeSaleMutation,
   useGetSalesQuery,
+  useGetSingleSaleQuery,
 } = allApi;
 
 export default allApi;

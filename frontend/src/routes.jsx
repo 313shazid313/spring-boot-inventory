@@ -27,6 +27,7 @@ import PurchaseList from "./pages/purchase/PurchaseList";
 import Makepurchase from "./pages/purchase/Makepurchase";
 import MakeSell from "./pages/sale/MakeSell";
 import SaleList from "./pages/sale/SaleList";
+import ViewSell from "./pages/sale/ViewSell";
 
 const routes = createBrowserRouter([
   {
@@ -68,6 +69,7 @@ const routes = createBrowserRouter([
 
       { path: "make-sale", element: <MakeSell /> },
       { path: "get-sales", element: <SaleList /> },
+      { path: "get-sales/sale/:id", element: <ViewSell /> },
     ],
   },
 ]);
