@@ -107,15 +107,7 @@ const AdminNav = () => {
               </NavLink>
             </li>
 
-            <li>
-              <NavLink
-                to="/dashboard/purchase"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-              >
-                <FiPlusCircle className="text-lg" />
-                <span className="ms-3">Purchase</span>
-              </NavLink>
-            </li>
+
             <li>
               <NavLink
                 to="/dashboard/suppliers"
