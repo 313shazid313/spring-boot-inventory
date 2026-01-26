@@ -20,6 +20,8 @@ import SupplierForm from "./pages/suppliers/SupplierForm";
 import SupplierUpdate from "./pages/suppliers/SupplierUpdate";
 import PurchaseList from "./pages/purchase/PurchaseList";
 import Makepurchase from "./pages/purchase/Makepurchase";
+import MakeSell from "./pages/sale/MakeSell";
+import SaleList from "./pages/sale/SaleList";
 
 const routes = createBrowserRouter([
   {
@@ -54,6 +56,9 @@ const routes = createBrowserRouter([
 
       { path: "make-purchase", element: <Makepurchase /> },
       { path: "get-purchases", element: <PurchaseList /> },
+
+      { path: "make-sale", element: <MakeSell /> },
+      { path: "get-sales", element: <SaleList /> },
     ],
   },
 ]);

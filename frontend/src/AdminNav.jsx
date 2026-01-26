@@ -5,7 +5,6 @@ import toast from "react-hot-toast";
 
 // React Icons
 import {
-  FiUser,
   FiUsers,
   FiBriefcase,
   FiGrid,
@@ -81,148 +80,87 @@ const AdminNav = () => {
             <li>
               <NavLink
                 to="/dashboard/employees"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className="flex items-center p-2"
               >
-                <FiUser className="text-lg" />
-                <span className="flex-1 ms-3 whitespace-nowrap">Employees</span>
+                <FiUsers className="text-lg" />
+                <span className="ms-3">Employees</span>
               </NavLink>
             </li>
 
             <li>
               <NavLink
                 to="/dashboard/category-list"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className="flex items-center p-2"
               >
-                <FiPlusCircle className="text-lg" />
+                <FiGrid className="text-lg" />
                 <span className="ms-3">Categories</span>
               </NavLink>
             </li>
+
             <li>
               <NavLink
                 to="/dashboard/items-list"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className="flex items-center p-2"
               >
-                <FiPlusCircle className="text-lg" />
+                <FiClipboard className="text-lg" />
                 <span className="ms-3">Items</span>
               </NavLink>
             </li>
 
-
             <li>
               <NavLink
                 to="/dashboard/suppliers"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className="flex items-center p-2"
               >
-                <FiPlusCircle className="text-lg" />
+                <FiBriefcase className="text-lg" />
                 <span className="ms-3">Suppliers</span>
               </NavLink>
             </li>
+
             <li>
               <NavLink
                 to="/dashboard/make-purchase"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className="flex items-center p-2"
               >
                 <FiPlusCircle className="text-lg" />
                 <span className="ms-3">Make Purchase</span>
               </NavLink>
             </li>
+
             <li>
               <NavLink
                 to="/dashboard/get-purchases"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className="flex items-center p-2"
               >
-                <FiPlusCircle className="text-lg" />
-                <span className="ms-3">Get Purchases</span>
+                <FiList className="text-lg" />
+                <span className="ms-3">Purchases List</span>
               </NavLink>
             </li>
-            {data?.isAdmin && (
-              <>
-                <li>
-                  <NavLink
-                    to="/dashboard/charts"
-                    className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                  >
-                    <FiBarChart2 className="text-lg" />
-                    <span className="flex-1 ms-3 whitespace-nowrap">
-                      Charts
-                    </span>
-                  </NavLink>
-                </li>
-
-                <li>
-                  <NavLink
-                    to="/dashboard/employees"
-                    className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                  >
-                    <FiUsers className="text-lg" />
-                    <span className="ms-3">Employees</span>
-                  </NavLink>
-                </li>
-
-                <li>
-                  <NavLink
-                    to="/dashboard/departments"
-                    className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                  >
-                    <FiGrid className="text-lg" />
-                    <span className="ms-3">Departments</span>
-                  </NavLink>
-                </li>
-
-                <li>
-                  <NavLink
-                    to="/dashboard/jobs"
-                    className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                  >
-                    <FiBriefcase className="text-lg" />
-                    <span className="ms-3">Jobs of Employee</span>
-                  </NavLink>
-                </li>
-
-                <li>
-                  <NavLink
-                    to="/dashboard/view-leave-requests-admin"
-                    className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                  >
-                    <FiClipboard className="text-lg" />
-                    <span className="ms-3">Leave Requests</span>
-                  </NavLink>
-                </li>
-
-                <li>
-                  <NavLink
-                    to="/dashboard/payrolls"
-                    className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                  >
-                    <FiDollarSign className="text-lg" />
-                    <span className="ms-3">Payrolls</span>
-                  </NavLink>
-                </li>
-              </>
-            )}
-
-            {/* {!data?.isAdmin && (
-              <>
-                <li>
-                  <NavLink
-                    to="/dashboard/view-leave-requests-employee"
-                    className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                  >
-                    <FiList className="text-lg" />
-                    <span className="ms-3">My Leave Requests</span>
-                  </NavLink>
-                </li>
-              </>
-            )} */}
 
             <li>
-              <button
-                type="button"
-                onClick={handleLogout}
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group"
+              <NavLink
+                to="/dashboard/make-sale"
+                className="flex items-center p-2"
               >
+                <FiDollarSign className="text-lg" />
+                <span className="ms-3">Make Sale</span>
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                to="/dashboard/get-sales"
+                className="flex items-center p-2"
+              >
+                <FiBarChart2 className="text-lg" />
+                <span className="ms-3">Sales List</span>
+              </NavLink>
+            </li>
+
+            <li>
+              <button onClick={handleLogout} className="flex items-center p-2">
                 <FiLogOut className="text-xl" />
-                <span className="flex-1 ms-3 whitespace-nowrap">Logout</span>
+                <span className="ms-3">Logout</span>
               </button>
             </li>
           </ul>
