@@ -168,6 +168,28 @@ const allApi = createApi({
       }),
       providesTags: ["All"],
     }),
+
+    getSingleSupplier: builder.query({
+      query: (id) => `/suppliers/${id}`,
+      providesTags: ["All"],
+    }),
+
+    makePurchase: builder.mutation({
+      query: (data) => ({
+        url: "/purchases",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["All"],
+    }),
+
+    getPurchases: builder.query({
+      query: () => ({
+        url: "/purchases",
+        method: "GET",
+      }),
+      providesTags: ["All"],
+    }),
   }),
 });
 
@@ -198,6 +220,11 @@ export const {
   useGetSuppliersQuery,
   useUpdateSupplierMutation,
   useCreateSupplierMutation,
+  useGetSingleSupplierQuery,
+
+  //purchase
+  useMakePurchaseMutation,
+  useGetPurchasesQuery,
 } = allApi;
 
 export default allApi;

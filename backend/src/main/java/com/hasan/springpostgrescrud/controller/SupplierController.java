@@ -42,4 +42,10 @@ public class SupplierController {
                 .orElseThrow(() -> new RuntimeException("Supplier not found with id " + id));
     }
 
+    @GetMapping("/{id}")
+    public Supplier getSupplierById(@PathVariable Long id) {
+        return supplierRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Supplier not found with id " + id));
+    }
+
 }

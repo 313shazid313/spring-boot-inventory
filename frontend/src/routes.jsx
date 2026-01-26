@@ -14,10 +14,12 @@ import CategoryUpdate from "./pages/category/CategoryUpdate";
 import ItemsList from "./pages/items/ItemsList";
 import ItemForm from "./pages/items/ItemForm";
 import ItemUpdate from "./pages/items/ItemUpdate";
-import Makepurchase from "./pages/purchase/Makepurchase";
+
 import SupplierList from "./pages/suppliers/SupplierList";
 import SupplierForm from "./pages/suppliers/SupplierForm";
 import SupplierUpdate from "./pages/suppliers/SupplierUpdate";
+import PurchaseList from "./pages/purchase/PurchaseList";
+import Makepurchase from "./pages/purchase/Makepurchase";
 
 const routes = createBrowserRouter([
   {
@@ -39,7 +41,7 @@ const routes = createBrowserRouter([
       { path: "items-list", element: <ItemsList /> },
       { path: "items-list/item-form", element: <ItemForm /> },
       { path: "items-list/item-update/:id", element: <ItemUpdate /> },
-      { path: "purchase", element: <Makepurchase /> },
+
       // { path: "charts", element: <Charts /> },
       { path: "employees/emploree-form", element: <EmployeeForm /> },
       { path: "employees/employee-update/:id", element: <EmployeeUpdate /> },
@@ -49,6 +51,9 @@ const routes = createBrowserRouter([
       { path: "suppliers", element: <SupplierList /> },
       { path: "suppliers/supplier-form", element: <SupplierForm /> },
       { path: "suppliers/supplier-update/:id", element: <SupplierUpdate /> },
+
+      { path: "make-purchase", element: <Makepurchase /> },
+      { path: "get-purchases", element: <PurchaseList /> },
     ],
   },
 ]);
