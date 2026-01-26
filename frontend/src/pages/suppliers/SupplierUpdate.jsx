@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {
   useGetSingleSupplierQuery,
-useUpdateSupplierMutation,
+  useUpdateSupplierMutation,
 } from "../../redux/rtk/all-requests";
 import toast from "react-hot-toast";
 import Loading from "../../utility/Loading";
@@ -49,7 +49,7 @@ const SupplierUpdate = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(element)
+      console.log(element);
       await updateSupplier({ id, ...element }).unwrap();
       toast.success("Supplier updated successfully!");
       navigate("/dashboard/suppliers"); // redirect to supplier list (or wherever)
@@ -59,15 +59,11 @@ const SupplierUpdate = () => {
     }
   };
 
-
   if (isEmployeeLoading) return <Loading />;
   if (error) return <ErrorPage />;
 
-
-
-
   return (
-      <div>
+    <div>
       <div>
         <p className="text-2xl font-bold mb-6 text-center">Add New Supplier</p>
         <form onSubmit={handleSubmit} className="max-w-4xl mx-auto">
@@ -143,7 +139,7 @@ const SupplierUpdate = () => {
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SupplierUpdate
+export default SupplierUpdate;

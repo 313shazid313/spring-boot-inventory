@@ -1,8 +1,12 @@
 import { useGetSingleSaleQuery } from "../../redux/rtk/all-requests";
 import { useParams } from "react-router-dom";
-import { PDFDownloadLink, Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
-
-
+import {
+  PDFDownloadLink,
+  Document,
+  Page,
+  Text,
+  View,
+} from "@react-pdf/renderer";
 
 // Create a PDF document component
 // Create a visually enhanced PDF document component
@@ -15,16 +19,28 @@ const InvoiceDocument = ({ sale }) => (
       {/* Customer Information */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Customer Information</Text>
-        <Text style={styles.text}><Text style={styles.bold}>Name:</Text> {sale.customer.name}</Text>
-        <Text style={styles.text}><Text style={styles.bold}>Email:</Text> {sale.customer.email}</Text>
-        <Text style={styles.text}><Text style={styles.bold}>Phone:</Text> {sale.customer.phoneNumber}</Text>
+        <Text style={styles.text}>
+          <Text style={styles.bold}>Name:</Text> {sale.customer.name}
+        </Text>
+        <Text style={styles.text}>
+          <Text style={styles.bold}>Email:</Text> {sale.customer.email}
+        </Text>
+        <Text style={styles.text}>
+          <Text style={styles.bold}>Phone:</Text> {sale.customer.phoneNumber}
+        </Text>
       </View>
 
       {/* Sale Information */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Sale Details</Text>
-        <Text style={styles.text}><Text style={styles.bold}>Total Amount:</Text> ${sale.totalAmount.toFixed(2)}</Text>
-        <Text style={styles.text}><Text style={styles.bold}>Date:</Text> {new Date(sale.saleDate).toLocaleString()}</Text>
+        <Text style={styles.text}>
+          <Text style={styles.bold}>Total Amount:</Text> $
+          {sale.totalAmount.toFixed(2)}
+        </Text>
+        <Text style={styles.text}>
+          <Text style={styles.bold}>Date:</Text>{" "}
+          {new Date(sale.saleDate).toLocaleString()}
+        </Text>
       </View>
 
       {/* Items Sold */}
@@ -39,7 +55,7 @@ const InvoiceDocument = ({ sale }) => (
             <Text style={styles.tableCol}>Quantity</Text>
             <Text style={styles.tableCol}>Total</Text>
           </View>
-          
+
           {/* Table Rows */}
           {sale.saleItems.map((item) => (
             <View style={styles.tableRow} key={item.id}>
@@ -47,7 +63,9 @@ const InvoiceDocument = ({ sale }) => (
               <Text style={styles.tableCol}>{item.item.category.name}</Text>
               <Text style={styles.tableCol}>${item.price.toFixed(2)}</Text>
               <Text style={styles.tableCol}>{item.quantity}</Text>
-              <Text style={styles.tableCol}>${(item.price * item.quantity).toFixed(2)}</Text>
+              <Text style={styles.tableCol}>
+                ${(item.price * item.quantity).toFixed(2)}
+              </Text>
             </View>
           ))}
         </View>
@@ -66,61 +84,61 @@ const styles = {
   page: {
     padding: 30,
     fontSize: 12,
-    fontFamily: 'Helvetica',
+    fontFamily: "Helvetica",
     lineHeight: 1.5,
   },
   header: {
     fontSize: 28,
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: 20,
-    fontWeight: 'bold',
-    color: '#333',
+    fontWeight: "bold",
+    color: "#333",
   },
   section: {
     marginBottom: 20,
     padding: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#eee',
+    borderBottomColor: "#eee",
   },
   sectionTitle: {
     fontSize: 16,
     marginBottom: 10,
-    fontWeight: 'bold',
-    color: '#555',
+    fontWeight: "bold",
+    color: "#555",
   },
   text: {
     marginBottom: 5,
   },
   bold: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   table: {
-    display: 'table',
-    width: 'auto',
+    display: "table",
+    width: "auto",
     borderWidth: 1,
-    borderColor: '#ddd',
-    borderStyle: 'solid',
+    borderColor: "#ddd",
+    borderStyle: "solid",
   },
   tableRow: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   tableHeader: {
-    backgroundColor: '#f5f5f5',
-    fontWeight: 'bold',
+    backgroundColor: "#f5f5f5",
+    fontWeight: "bold",
   },
   tableCol: {
     flex: 1,
     padding: 5,
     borderRightWidth: 1,
-    borderRightColor: '#ddd',
+    borderRightColor: "#ddd",
   },
   footer: {
     marginTop: 30,
-    textAlign: 'center',
+    textAlign: "center",
   },
   footerText: {
     fontSize: 12,
-    color: '#888',
+    color: "#888",
   },
 };
 
@@ -138,15 +156,25 @@ const ViewSell = () => {
 
       <div className="mb-4">
         <h3 className="text-xl font-semibold">Customer Info</h3>
-        <p><strong>Name:</strong> {data.customer.name}</p>
-        <p><strong>Email:</strong> {data.customer.email}</p>
-        <p><strong>Phone:</strong> {data.customer.phoneNumber}</p>
+        <p>
+          <strong>Name:</strong> {data.customer.name}
+        </p>
+        <p>
+          <strong>Email:</strong> {data.customer.email}
+        </p>
+        <p>
+          <strong>Phone:</strong> {data.customer.phoneNumber}
+        </p>
       </div>
 
       <div className="mb-4">
         <h3 className="text-xl font-semibold">Sale Info</h3>
-        <p><strong>Total Amount:</strong> ${data.totalAmount}</p>
-        <p><strong>Date:</strong> {new Date(data.saleDate).toLocaleString()}</p>
+        <p>
+          <strong>Total Amount:</strong> ${data.totalAmount}
+        </p>
+        <p>
+          <strong>Date:</strong> {new Date(data.saleDate).toLocaleString()}
+        </p>
       </div>
 
       <div>
@@ -165,10 +193,14 @@ const ViewSell = () => {
             {data.saleItems.map((saleItem) => (
               <tr key={saleItem.id}>
                 <td className="border px-2 py-1">{saleItem.item.name}</td>
-                <td className="border px-2 py-1">{saleItem.item.category.name}</td>
+                <td className="border px-2 py-1">
+                  {saleItem.item.category.name}
+                </td>
                 <td className="border px-2 py-1">${saleItem.price}</td>
                 <td className="border px-2 py-1">{saleItem.quantity}</td>
-                <td className="border px-2 py-1">${saleItem.price * saleItem.quantity}</td>
+                <td className="border px-2 py-1">
+                  ${saleItem.price * saleItem.quantity}
+                </td>
               </tr>
             ))}
           </tbody>

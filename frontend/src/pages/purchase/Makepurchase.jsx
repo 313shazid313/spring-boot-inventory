@@ -1,56 +1,58 @@
-import { useState, useMemo } from "react"
+import { useState, useMemo } from "react";
 import {
   useMakePurchaseMutation,
   useGetSuppliersQuery,
   useGetItemsQuery,
-} from "../../redux/rtk/all-requests"
+} from "../../redux/rtk/all-requests";
+import toast from "react-hot-toast";
 
 const Makepurchase = () => {
-  const [makePurchase, { isLoading }] = useMakePurchaseMutation()
-  const { data: suppliers = [] } = useGetSuppliersQuery()
-  const { data: items = [] } = useGetItemsQuery()
+  const [makePurchase, { isLoading }] = useMakePurchaseMutation();
+  const { data: suppliers = [] } = useGetSuppliersQuery();
+  const { data: items = [] } = useGetItemsQuery();
 
   const [form, setForm] = useState({
     quantity: "",
     supplierId: "",
     itemId: "",
-  })
+  });
 
   const selectedItem = useMemo(
     () => items.find((i) => i.id === Number(form.itemId)),
-    [items, form.itemId]
-  )
+    [items, form.itemId],
+  );
 
   const totalPrice = useMemo(() => {
-    if (!selectedItem || !form.quantity) return 0
-    return selectedItem.price * Number(form.quantity)
-  }, [selectedItem, form.quantity])
+    if (!selectedItem || !form.quantity) return 0;
+    return selectedItem.price * Number(form.quantity);
+  }, [selectedItem, form.quantity]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target
-    setForm((prev) => ({ ...prev, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    if (!selectedItem) return
+    e.preventDefault();
+    if (!selectedItem) return;
 
     const payload = {
       quantity: Number(form.quantity),
       totalPrice,
       supplier: { id: Number(form.supplierId) },
       item: { id: selectedItem.id },
-    }
+    };
 
     try {
-      await makePurchase(payload).unwrap()
-      alert("Purchase created")
-      setForm({ quantity: "", supplierId: "", itemId: "" })
+      await makePurchase(payload).unwrap();
+      toast.success("Purchase created successfully");
+
+      setForm({ quantity: "", supplierId: "", itemId: "" });
     } catch (err) {
-      console.error(err)
-      alert("Failed to create purchase")
+      console.error(err);
+      toast.error("Failed to create purchase");
     }
-  }
+  };
 
   return (
     <div>
@@ -125,8 +127,7 @@ const Makepurchase = () => {
 
         {/* Total */}
         <p className="mt-4 text-sm text-gray-800">
-          Total Price:{" "}
-          <span className="font-semibold">{totalPrice}</span>
+          Total Price: <span className="font-semibold">{totalPrice}</span>
         </p>
 
         {/* Submit */}
@@ -143,7 +144,7 @@ const Makepurchase = () => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Makepurchase
+export default Makepurchase;

@@ -46,7 +46,7 @@ const Employees = () => {
   return (
     <div>
       <p className="text-2xl py-4 text-center">Suppliers</p>
-      <div className="flex justify-between items-center gap-4">
+      <div className="flex justify-end items-center gap-4">
         {/* Add Button */}
         <Link
           to="emploree-form"
