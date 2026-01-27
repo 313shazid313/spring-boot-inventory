@@ -5,7 +5,7 @@ import EmployeeForm from "./pages/EmployeeForm";
 import EmployeeUpdate from "./pages/EmployeeUpdate";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
-import EditProfile from "./pages/EditProfile";
+
 import ResetPassword from "./pages/ResetPassword";
 // import Charts from "./pages/Charts";
 import CategoryList from "./pages/category/CategoryList";
@@ -53,7 +53,6 @@ const routes = createBrowserRouter([
       // { path: "charts", element: <Charts /> },
       { path: "employees/emploree-form", element: <EmployeeForm /> },
       { path: "employees/employee-update/:id", element: <EmployeeUpdate /> },
-      { path: "profile/edit-profile", element: <EditProfile /> },
       { path: "profile/reset-password/:id", element: <ResetPassword /> },
 
       { path: "suppliers", element: <SupplierList /> },

@@ -3,9 +3,10 @@ import { useGetSuppliersQuery } from "../../redux/rtk/all-requests.js";
 import Loading from "../../utility/Loading.jsx";
 import ErrorPage from "../../utility/ErrorPage.jsx";
 import { useEffect } from "react";
+import PurchasesModal from "../purchase/PurchasesModal.jsx";
 
-//icons
-import { FaEdit } from "react-icons/fa";
+import { useState } from "react";
+import { FaEdit, FaEye } from "react-icons/fa";
 
 // tooltip
 import "react-tooltip/dist/react-tooltip.css";
@@ -13,6 +14,8 @@ import { Tooltip } from "react-tooltip";
 
 const SupplierList = () => {
   const { data, isError, isLoading, refetch } = useGetSuppliersQuery();
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedSupplier, setSelectedSupplier] = useState(null);
 
   console.log(data);
 
@@ -73,18 +76,27 @@ const SupplierList = () => {
                   <td className="px-3 py-3">{item?.email}</td>
                   <td className="px-3 py-3">{item?.phoneNumber}</td>
 
-                  <td className="px-3 py-3 flex space-x-2">
-                    <div className="flex flex-row">
-                      <Link
-                        className="flex justify-center"
-                        data-tooltip-id="my-tooltip"
-                        data-tooltip-content="Edit"
-                        data-tooltip-place="top"
-                        to={`supplier-update/${item.id}`}
-                      >
-                        <FaEdit className="text-xl text-blue-500" />
-                      </Link>
-                    </div>
+
+
+                  <td className="px-3 py-3 flex space-x-3">
+                    <Link
+                      data-tooltip-id="my-tooltip"
+                      data-tooltip-content="Edit"
+                      to={`supplier-update/${item.id}`}
+                    >
+                      <FaEdit className="text-xl text-blue-500" />
+                    </Link>
+
+                    <button
+                      data-tooltip-id="my-tooltip"
+                      data-tooltip-content="View Purchases"
+                      onClick={() => {
+                        setSelectedSupplier(item);
+                        setOpenModal(true);
+                      }}
+                    >
+                      <FaEye className="text-xl text-green-600" />
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -94,6 +106,11 @@ const SupplierList = () => {
         </div>
         <br />
       </div>
+      <PurchasesModal
+        open={openModal}
+        supplier={selectedSupplier}
+        onClose={() => setOpenModal(false)}
+      />
     </div>
   );
 };

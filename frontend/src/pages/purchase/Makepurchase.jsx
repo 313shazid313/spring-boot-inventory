@@ -49,7 +49,7 @@ const Makepurchase = () => {
       await makePurchase(payload).unwrap();
       toast.success("Purchase created successfully");
       setForm({ quantity: "", supplierId: "", itemId: "" });
-      navigate("/dashboard/purchases");
+      navigate("/dashboard/get-purchases");
     } catch (err) {
       console.error(err);
       toast.error("Failed to create purchase");

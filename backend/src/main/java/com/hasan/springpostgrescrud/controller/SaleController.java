@@ -43,6 +43,11 @@ public class SaleController {
         sale.setCustomer(customer);
         sale.setSaleDate(LocalDateTime.now());
 
+        // ✅ NEW: set invoice number
+        if (request.get("invoiceNumber") != null) {
+            sale.setInvoiceNumber(request.get("invoiceNumber").toString());
+        }
+
         double totalAmount = 0;
         List<SaleItem> saleItems = new ArrayList<>();
 

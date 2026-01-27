@@ -3,6 +3,7 @@ package com.hasan.springpostgrescrud.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "purchases")
@@ -24,6 +25,7 @@ public class Purchase {
 
     @ManyToOne
     @JoinColumn(name = "supplier_id")
+    @JsonBackReference
     private Supplier supplier;
 
     @ManyToOne

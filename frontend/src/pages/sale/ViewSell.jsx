@@ -151,71 +151,101 @@ const ViewSell = () => {
   if (!data) return <div>No sale found.</div>;
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Sale Details</h2>
-
-      <div className="mb-4">
-        <h3 className="text-xl font-semibold">Customer Info</h3>
-        <p>
-          <strong>Name:</strong> {data.customer.name}
-        </p>
-        <p>
-          <strong>Email:</strong> {data.customer.email}
-        </p>
-        <p>
-          <strong>Phone:</strong> {data.customer.phoneNumber}
-        </p>
-      </div>
-
-      <div className="mb-4">
-        <h3 className="text-xl font-semibold">Sale Info</h3>
-        <p>
-          <strong>Total Amount:</strong> ${data.totalAmount}
-        </p>
-        <p>
-          <strong>Date:</strong> {new Date(data.saleDate).toLocaleString()}
-        </p>
-      </div>
-
-      <div>
-        <h3 className="text-xl font-semibold mb-2">Items Sold</h3>
-        <table className="w-full border border-gray-300">
-          <thead>
-            <tr className="bg-gray-200">
-              <th className="border px-2 py-1">Item Name</th>
-              <th className="border px-2 py-1">Category</th>
-              <th className="border px-2 py-1">Price</th>
-              <th className="border px-2 py-1">Quantity</th>
-              <th className="border px-2 py-1">Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.saleItems.map((saleItem) => (
-              <tr key={saleItem.id}>
-                <td className="border px-2 py-1">{saleItem.item.name}</td>
-                <td className="border px-2 py-1">
-                  {saleItem.item.category.name}
-                </td>
-                <td className="border px-2 py-1">${saleItem.price}</td>
-                <td className="border px-2 py-1">{saleItem.quantity}</td>
-                <td className="border px-2 py-1">
-                  ${saleItem.price * saleItem.quantity}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="mt-4">
+    <div className="max-w-5xl mx-auto p-6  ">
+      {/* Actions */}
+      <div className="flex justify-end mb-6">
         <PDFDownloadLink
           document={<InvoiceDocument sale={data} />}
-          fileName={`invoice_${data.id}.pdf`}
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          fileName={`invoice NO : ${data?.invoiceNumber}.pdf`}
+          className="inline-flex items-center bg-blue-600 text-white text-sm font-medium px-5 py-2.5 rounded-md hover:bg-blue-700 transition"
         >
-          {({ loading }) => (loading ? "Preparing PDF..." : "Download Invoice")}
+          {({ loading }) => (loading ? "Generating PDF…" : "Download Invoice")}
         </PDFDownloadLink>
       </div>
+
+      {/* Header */}
+      <h2 className="text-3xl font-semibold text-gray-800 mb-8">
+        Sale Details
+      </h2>
+
+      {/* Customer Info */}
+      <section className="mb-6">
+        <h3 className="text-lg font-semibold text-gray-700 mb-2">
+          Customer Information
+        </h3>
+        <div className="space-y-1 text-sm text-gray-600">
+          <p>
+            <span className="font-medium text-gray-800">Name:</span>{" "}
+            {data.customer.name}
+          </p>
+          <p>
+            <span className="font-medium text-gray-800">Email:</span>{" "}
+            {data.customer.email}
+          </p>
+          <p>
+            <span className="font-medium text-gray-800">Phone:</span>{" "}
+            {data.customer.phoneNumber}
+          </p>
+        </div>
+      </section>
+
+      {/* Sale Info */}
+      <section className="mb-8">
+        <h3 className="text-lg font-semibold text-gray-700 mb-2">
+          Sale Information
+        </h3>
+        <div className="space-y-1 text-sm text-gray-600">
+          <p>
+            <span className="font-medium text-gray-800">Total Amount:</span> $
+            {data.totalAmount.toFixed(2)}
+          </p>
+          <p>
+            <span className="font-medium text-gray-800">Date:</span>{" "}
+            {new Date(data.saleDate).toLocaleString()}
+          </p>
+        </div>
+      </section>
+
+      {/* Items Table */}
+      <section>
+        <h3 className="text-lg font-semibold text-gray-700 mb-3">Items Sold</h3>
+
+        <div className="overflow-x-auto">
+          <table className="w-full border border-gray-200 text-sm">
+            <thead className="bg-gray-100 text-gray-700">
+              <tr>
+                <th className="border px-3 py-2 text-left">Item</th>
+                <th className="border px-3 py-2 text-left">Category</th>
+                <th className="border px-3 py-2 text-right">Price</th>
+                <th className="border px-3 py-2 text-right">Qty</th>
+                <th className="border px-3 py-2 text-right">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.saleItems.map((saleItem) => {
+                const total = saleItem.price * saleItem.quantity;
+                return (
+                  <tr key={saleItem.id} className="hover:bg-gray-50">
+                    <td className="border px-3 py-2">{saleItem.item.name}</td>
+                    <td className="border px-3 py-2">
+                      {saleItem.item.category.name}
+                    </td>
+                    <td className="border px-3 py-2 text-right">
+                      ${saleItem.price.toFixed(2)}
+                    </td>
+                    <td className="border px-3 py-2 text-right">
+                      {saleItem.quantity}
+                    </td>
+                    <td className="border px-3 py-2 text-right font-medium">
+                      ${total.toFixed(2)}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </section>
     </div>
   );
 };

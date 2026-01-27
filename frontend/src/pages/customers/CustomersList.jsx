@@ -5,13 +5,17 @@ import ErrorPage from "../../utility/ErrorPage.jsx";
 import { useEffect } from "react";
 
 //icons
-import { FaEdit } from "react-icons/fa";
+import { useState } from "react";
+import { FaEdit, FaEye } from "react-icons/fa";
 
 // tooltip
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip } from "react-tooltip";
 const CustomersList = () => {
   const { data, isError, isLoading, refetch } = useGetCustomersQuery();
+  const [selectedCustomer, setSelectedCustomer] = useState(null);
+
+  const closeModal = () => setSelectedCustomer(null);
 
   console.log(data);
 
@@ -70,18 +74,25 @@ const CustomersList = () => {
                   <td className="px-3 py-3">{item?.name}</td>
                   <td className="px-3 py-3">{item?.email}</td>
                   <td className="px-3 py-3">{item?.phoneNumber}</td>
-                  <td className="px-3 py-3 flex space-x-2">
-                    <div className="flex flex-row">
-                      <Link
-                        className="flex justify-center"
-                        data-tooltip-id="my-tooltip"
-                        data-tooltip-content="Edit"
-                        data-tooltip-place="top"
-                        to={`customer-update/${item.id}`}
-                      >
-                        <FaEdit className="text-xl text-blue-500" />
-                      </Link>
-                    </div>
+
+                  <td className="px-3 py-3 flex space-x-3">
+                    {/* Edit */}
+                    <Link
+                      data-tooltip-id="my-tooltip"
+                      data-tooltip-content="Edit"
+                      to={`customer-update/${item.id}`}
+                    >
+                      <FaEdit className="text-xl text-blue-500" />
+                    </Link>
+
+                    {/* View Sales */}
+                    <button
+                      data-tooltip-id="my-tooltip"
+                      data-tooltip-content="View Sales"
+                      onClick={() => setSelectedCustomer(item)}
+                    >
+                      <FaEye className="text-xl text-green-600" />
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -91,6 +102,77 @@ const CustomersList = () => {
         </div>
         <br />
       </div>
+      {selectedCustomer && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/30 backdrop-blur-sm">
+          <div className="bg-white w-full max-w-3xl rounded-lg shadow-lg p-6 overflow-y-auto max-h-[90vh]">
+            {/* Header */}
+            <div className="flex justify-between items-center border-b pb-2">
+              <h2 className="text-xl font-semibold">
+                Sales of {selectedCustomer.name}
+              </h2>
+              <button
+                onClick={closeModal}
+                className="text-red-500 text-lg font-bold"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Body */}
+            <div className="mt-4 space-y-4">
+              {selectedCustomer.sales.length === 0 ? (
+                <p className="text-center text-gray-500">
+                  No sales found for this customer.
+                </p>
+              ) : (
+                selectedCustomer.sales.map((sale) => (
+                  <div
+                    key={sale.id}
+                    className="border rounded-lg p-4 bg-gray-50"
+                  >
+                    <div className="flex justify-between mb-2">
+                      <p>
+                        <strong>Invoice:</strong> {sale.invoiceNumber}
+                      </p>
+                      <p>
+                        <strong>Total:</strong> {sale.totalAmount}
+                      </p>
+                    </div>
+
+                    <p className="text-sm text-gray-600 mb-2">
+                      Sale Date: {new Date(sale.saleDate).toLocaleString()}
+                    </p>
+
+                    {/* Items Table */}
+                    <table className="w-full text-sm border">
+                      <thead className="bg-gray-200">
+                        <tr>
+                          <th className="px-2 py-1 border">Item</th>
+                          <th className="px-2 py-1 border">Qty</th>
+                          <th className="px-2 py-1 border">Price</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {sale.saleItems.map((si) => (
+                          <tr key={si.id}>
+                            <td className="px-2 py-1 border">{si.item.name}</td>
+                            <td className="px-2 py-1 border text-center">
+                              {si.quantity}
+                            </td>
+                            <td className="px-2 py-1 border text-right">
+                              {si.price}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
