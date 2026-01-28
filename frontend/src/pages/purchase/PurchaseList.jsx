@@ -2,6 +2,7 @@ import { useGetPurchasesQuery } from "../../redux/rtk/all-requests";
 
 const PurchaseList = () => {
   const { data = [], isLoading, isError } = useGetPurchasesQuery();
+  console.log(data);
 
   if (isLoading) {
     return <p className="text-center py-10">Loading...</p>;
@@ -15,7 +16,7 @@ const PurchaseList = () => {
 
   return (
     <div>
-      <p className="text-2xl py-4 text-center font-semibold">Sales List</p>
+      <p className="text-2xl py-4 text-center font-semibold">Purchased List</p>
 
       <br />
 
